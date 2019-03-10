@@ -8,11 +8,11 @@ resource "aws_vpc" "bridge" {
 
 }
 
-resource "aws_subnet" "holds" {
-    vpc_id = "${var.vpc_id}"
-    cidr_block = "${var.subnet_cidr}"
-    availability_zone = "${var.subnet_zone}"
+resource "aws_subnet" "publicholds" {
     count = "${var.subnet_count}"
+    vpc_id = "${var.vpc_id}"
+    cidr_block = "10.0.${count.index}.0/24"
+    availability_zone = "${var.subnet_zone}"
     tags {
         Name = "cargo_holds"
     }
@@ -62,7 +62,7 @@ resource "aws_internet_gateway" "clamp" {
 }
 
 resource "aws_route_table" "passageway" {
-    vpc_id = "${aws_vpc.bridge.id}"
+    vpc_id = "${var.vpc_id}"
 
     route {
         cidr_block = "0.0.0.0/0"
