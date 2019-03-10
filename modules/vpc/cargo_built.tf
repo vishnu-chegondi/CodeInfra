@@ -9,15 +9,26 @@ resource "aws_vpc" "bridge" {
 }
 
 resource "aws_subnet" "publicholds" {
-    count = "${var.subnet_count}"
+    count = "${var.public_subnet_count}"
     vpc_id = "${var.vpc_id}"
     cidr_block = "10.0.${count.index}.0/24"
     availability_zone = "${var.subnet_zone}"
     tags {
-        Name = "cargo_holds"
+        Name = "cargo_publicholds"
     }
 
 }
+
+resource "aws_subnet" "privateholds" {
+    count = "${var.private_subnet_count}"
+    cidr_block = "10.0.${count.index+var.public_subnet_count}.0/24"
+    vpc_id = "${var.vpc_id}"
+    availability_zone = "${var.subnet_zone}"
+    tags {
+        Name = "cargo_privateholds"
+    }
+}
+
 
 resource "aws_security_group" "lasher" {
     name = "lasher"
