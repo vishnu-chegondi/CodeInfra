@@ -1,0 +1,10 @@
+.mdl-layout-title{
+    color: #123456;
+    border-color: #125678;
+}
+.mdl-layout__header-row{
+    background: #123456;
+}
+.mdl-layout__header-row>a{
+    color: #fff;
+}
