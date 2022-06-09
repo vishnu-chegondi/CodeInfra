@@ -8,16 +8,27 @@ resource "aws_vpc" "bridge" {
 
 }
 
-resource "aws_subnet" "holds" {
+resource "aws_subnet" "publicholds" {
+    count = "${var.public_subnet_count}"
     vpc_id = "${var.vpc_id}"
-    cidr_block = "${var.subnet_cidr}"
+    cidr_block = "10.0.${count.index}.0/24"
     availability_zone = "${var.subnet_zone}"
-    count = "${var.subnet_count}"
     tags {
-        Name = "cargo_holds"
+        Name = "cargo_publicholds"
     }
 
 }
+
+resource "aws_subnet" "privateholds" {
+    count = "${var.private_subnet_count}"
+    cidr_block = "10.0.${count.index+var.public_subnet_count}.0/24"
+    vpc_id = "${var.vpc_id}"
+    availability_zone = "${var.subnet_zone}"
+    tags {
+        Name = "cargo_privateholds"
+    }
+}
+
 
 resource "aws_security_group" "lasher" {
     name = "lasher"
@@ -62,7 +73,7 @@ resource "aws_internet_gateway" "clamp" {
 }
 
 resource "aws_route_table" "passageway" {
-    vpc_id = "${aws_vpc.bridge.id}"
+    vpc_id = "${var.vpc_id}"
 
     route {
         cidr_block = "0.0.0.0/0"

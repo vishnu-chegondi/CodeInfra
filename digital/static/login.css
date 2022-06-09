@@ -1,0 +1,42 @@
+body{
+    background: #efefef;
+}
+.mdl-cell--8-col{
+    background: #fff;
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: 0px 2px 5px #cacaca;
+}
+.platforminfo{
+    background: #a1a1a1;
+    color: #fff;
+    padding:10px;
+    font-family: "Roboto",sans-serif;
+}
+#colored{
+    background: #5a5a5a;
+    width: 100%;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+input{
+    width: 100%;
+}
+.mdl-textfield{
+    width: 100%;
+}
+.platforminfo>p{
+    text-align: center;
+}
+.mdl-cell--6-col>p{
+    letter-spacing: 0.5px;
+}
+.mdl-cell--6-col>form>p{
+    float: right;
+    font-size: 12px;
+}
+.platforminfo>h4{
+    font-family: "Roboto",sans-serif;
+    letter-spacing: 1px;
+    text-align: center;
+}

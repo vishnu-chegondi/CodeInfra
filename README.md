@@ -5,4 +5,4 @@ This makes your infrastructure on AWS to be coded. Auto deployments of container
 ## Technologies
 
 - Terraform
-- Tornado
+- Flask

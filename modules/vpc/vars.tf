@@ -10,8 +10,12 @@ variable "vpc_tenancy" {}
 
 variable "vpc_id" {}
 
-variable "subnet_count" {
-  default = 0
+variable "public_subnet_count" {
+  default = 1
+}
+
+variable "private_subnet_count" {
+  default = 1
 }
 
 variable "subnet_cidr" {
